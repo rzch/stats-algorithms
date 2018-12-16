@@ -1,2 +1,2 @@
 # stats-algorithms
-Minimal working demos of statistics/;earning algorithms
+Minimal working demos of statistics/learning algorithms
