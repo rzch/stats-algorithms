@@ -28,7 +28,7 @@ kmax = 120; %number of timesteps to estimate
 for k = 1:kmax
     noise = mvnrnd([2; 2; 0; -0.1; 0.1; 0.01], diag([2^2, 2^2, 2^2, 0.01^2, 0.01^2, 0.01^2]))';
     if (y(3, k) > 2000)
-        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -2]*dt + noise];
+        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -12] + noise];
     else
         y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + noise];
     end
@@ -101,7 +101,7 @@ kmax = 120; %number of timesteps to estimate
 for k = 1:kmax
     noise = mvnrnd([2; 2; 0; -0.1; 0.1; 0.01], diag([2^2, 2^2, 2^2, 0.01^2, 0.01^2, 0.01^2]))';
     if (y(3, k) > 2000)
-        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -2]*dt + noise];
+        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -12] + noise];
     else
         y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + noise];
     end
@@ -115,7 +115,7 @@ N = 1000; %number of particles
 %generate initial particles
 x = repmat(y0, 1, N) + [250*randn(1, N); 250*randn(1, N); 250*randn(1, N); 
     10*randn(1, N); 10*randn(1, N); 1*randn(1, N)];
-x = [x; 1.75 + 0.2*randn(1, N)]; %inital guesses of descent rate
+x = [x; 10.5 + 1.2*randn(1, N)]; %inital guesses of descent rate
 
 x_est = []; %store state point estimates
 
@@ -123,9 +123,9 @@ for k = 1:(kmax - 1)
     %propagate particles
     for i = 1:N
         if (x(3, i) > 2050)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)];
         elseif (x(3, i) < 1950)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)];
         else
             x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i);
         end
@@ -179,7 +179,7 @@ kmax = 120; %number of timesteps to estimate
 for k = 1:kmax
     noise = mvnrnd([2; 2; 0; -0.1; 0.1; 0.01], diag([2^2, 2^2, 2^2, 0.01^2, 0.01^2, 0.01^2]))';
     if (y(3, k) > 2000)
-        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -2]*dt + noise];
+        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -12] + noise];
     else
         y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + noise];
     end
@@ -193,7 +193,7 @@ N = 1000; %number of particles
 %generate initial particles
 x = repmat(y0, 1, N) + [250*randn(1, N); 250*randn(1, N); 250*randn(1, N); 
     10*randn(1, N); 10*randn(1, N); 1*randn(1, N)];
-x = [x; 1.75 + 0.2*randn(1, N)]; %inital guesses of descent rate
+x = [x; 10.5 + 1.2*randn(1, N)]; %inital guesses of descent rate
 
 x_est = []; %store state point estimates
 
@@ -202,9 +202,9 @@ for k = 1:(kmax - 1)
     %propagate particles
     for i = 1:N
         if (x(3, i) > 2050)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)];
         elseif (x(3, i) < 1950)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)];
         else
             x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i);
         end
@@ -246,7 +246,7 @@ kmax = 120; %number of timesteps to estimate
 for k = 1:kmax
     noise = mvnrnd([2; 2; 0; -0.1; 0.1; 0.01], diag([2^2, 2^2, 2^2, 0.01^2, 0.01^2, 0.01^2]))';
     if (y(3, k) > 2000)
-        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -2]*dt + noise];
+        y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + [0; 0; 0; 0; 0; -12] + noise];
     else
         y = [y, [A(1:5, :); zeros(1, 6)]*y(:, k) + noise];
     end
@@ -260,7 +260,7 @@ N = 1000; %number of particles
 %generate initial particles
 x = repmat(y0, 1, N) + [250*randn(1, N); 250*randn(1, N); 250*randn(1, N); 
     10*randn(1, N); 10*randn(1, N); 1*randn(1, N)];
-x = [x; 1.75 + 0.2*randn(1, N)]; %inital guesses of descent rate
+x = [x; 10.5 + 1.2*randn(1, N)]; %inital guesses of descent rate
 
 x_est = []; %store state point estimates
 
@@ -273,9 +273,9 @@ for kk = 1:(kmax - 1)
     %propagate particles
     for i = 1:N
         if (x(3, i) > 2050)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; -x(7, i)];
         elseif (x(3, i) < 1950)
-            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)]*dt;
+            x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i) + [0; 0; 0; 0; 0; x(7, i)];
         else
             x(1:6, i) = [A(1:5, :); zeros(1, 6)]*x(1:6, i);
         end
@@ -305,9 +305,9 @@ for kk = 1:(kmax - 1)
         %propagate particles
         for i = 1:N
             if (xp(3, i) > 2050)
-                xp(1:6, i) = [A(1:5, :); zeros(1, 6)]*xp(1:6, i) + [0; 0; 0; 0; 0; -xp(7, i)]*dt;
+                xp(1:6, i) = [A(1:5, :); zeros(1, 6)]*xp(1:6, i) + [0; 0; 0; 0; 0; -xp(7, i)];
             elseif (xp(3, i) < 1950)
-                xp(1:6, i) = [A(1:5, :); zeros(1, 6)]*xp(1:6, i) + [0; 0; 0; 0; 0; xp(7, i)]*dt;
+                xp(1:6, i) = [A(1:5, :); zeros(1, 6)]*xp(1:6, i) + [0; 0; 0; 0; 0; xp(7, i)];
             else
                 xp(1:6, i) = [A(1:5, :); zeros(1, 6)]*xp(1:6, i);
             end
