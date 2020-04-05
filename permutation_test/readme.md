@@ -1,0 +1,1 @@
+A demonstration of permutation tests and confidence intervals for a one-sample location parameter implemented in Python, MATLAB and R.
